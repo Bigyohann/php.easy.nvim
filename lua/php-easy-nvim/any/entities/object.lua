@@ -1,4 +1,5 @@
 local Config = require('php-easy-nvim.any.config')
+local json = require('php-easy-nvim.vendor.json')
 
 local M = {}
 
@@ -29,7 +30,7 @@ local function initObject(type)
     local composerPath = vim.fn.getcwd() .. '/composer.json'
     if vim.fn.filereadable(composerPath) == 1 then
         local content = table.concat(vim.fn.readfile(composerPath), "\n")
-        local ok, composer = pcall(vim.json.decode, content)
+        local ok, composer = pcall(json.decode, content)
         if ok and composer then
             -- get psr-4 from autoload and autoload-dev
             local autoload_paths = {}
